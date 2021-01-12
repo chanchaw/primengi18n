@@ -1,6 +1,8 @@
 
 <h5>显示过滤行</h5>
 <p>在数据行之上显示用于过滤的行</p>
+<p><p-button label="测试官方API" ></p-button></p>
+
 <p-table #dt2 [value]="customers" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
 	[rowsPerPageOptions]="[10,25,50]" [loading]="loading" styleClass="p-datatable-customers" [paginator]="true"
 	currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

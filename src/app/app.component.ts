@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer, Representative } from './customer';
 import { CustomerService } from './customerservice';
-import { MessageService } from "primeng/api";
+import {  MessageService, PrimeNGConfig } from "primeng/api";
 
 @Component({
   selector: 'app-root',
@@ -22,9 +22,26 @@ export class AppComponent implements OnInit {
 
   activityValues: number[] = [0, 100];
 
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    public primengConfig:PrimeNGConfig,
+    private customerService: CustomerService) {}
 
   ngOnInit() {
+    // 汉化 PrimeNG 控件的显示
+    this.primengConfig.setTranslation({
+      startsWith:'以...开始',contains:'包含','notContains':'不包含',endsWith:'以...结束',equals:'等于',notEquals:'不等于',
+      lt:'小于',lte:'小于等于',gt:'大于',gte:'大于等于',is:'是',isNot:'不是',before:'以前',after:'之后',clear:'清除',apply:'应用',
+      matchAll:'全部匹配',matchAny:'匹配任何',addRule:'添加规则',removeRule:'移除规则',accept:'确认',reject:'取消',
+      choose:'选择',upload:'上传',cancel:'取消',
+      dayNames:['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+      dayNamesShort:['周日','周一','周二','周三','周四','周五','周六'],
+      dayNamesMin:['日','一','二','三','四','五','六'],
+      monthNames:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+      monthNamesShort:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+      today:'今天',weekHeader:'周',
+    })
+
+
     this.customerService.getCustomersLarge().then(customers => {
       this.customers = customers;
       this.loading = false;
@@ -55,5 +72,7 @@ export class AppComponent implements OnInit {
       { label: "Renewal", value: "renewal" },
       { label: "Proposal", value: "proposal" }
     ];
+
+
   }
 }
